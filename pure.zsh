@@ -144,7 +144,7 @@ prompt_pure_preprompt_render() {
 	preprompt_parts+=('%F{${prompt_pure_colors[path]}}%(9~|.../%8~|%~)%f')
 	
 	# Special Prompt for P4
-	if [[ $PWD == */hw/* ]]; then
+	if [[ $PWD == */hw* ]]; then
 	  # echo "${${PWD%/hw*}##*/}"
 	  # echo "${PWD##*/}"
 	  preprompt_parts+=('%B${${PWD%/hw*}##*/}%b')
