@@ -140,7 +140,21 @@ prompt_pure_preprompt_render() {
 	[[ -n $prompt_pure_state[username] ]] && preprompt_parts+=($prompt_pure_state[username])
 
 	# Set the path.
-	preprompt_parts+=('%F{${prompt_pure_colors[path]}}%~%f')
+	# preprompt_parts+=('%F{${prompt_pure_colors[path]}}%~%f')
+	preprompt_parts+=('%F{${prompt_pure_colors[path]}}%(9~|.../%8~|%~)%f')
+	
+	# Special Prompt for P4
+	if [[ $PWD == */hw/* ]]; then
+	  # echo "${${PWD%/hw*}##*/}"
+	  # echo "${PWD##*/}"
+	  preprompt_parts+=('%B${${PWD%/hw*}##*/}%b')
+
+	  if [[ $PWD == */hw/*/outdir* ]]; then
+	    preprompt_parts+=('%Bod%b')
+	  elif [[ $PWD == */hw/*/ip* ]]; then
+	    preprompt_parts+=('%Bsd%b')
+	  fi
+	fi
 
 	# Git branch and dirty status info.
 	typeset -gA prompt_pure_vcs_info
